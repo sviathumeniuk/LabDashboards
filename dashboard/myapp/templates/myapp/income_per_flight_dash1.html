@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Revenue Heatmap</title>
+    <link rel="stylesheet" href="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.css" type="text/css">
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.js"></script>
+    {{ script|safe }}
+</head>
+<body>
+    <h1>Revenue Heatmap</h1>
+
+    <form method="get" action=".">
+        <label for="departure">Departure:</label>
+        <select id="departure" name="departure">
+            <option value="All" {% if selected_departure == "All" or not selected_departure %}selected{% endif %}>All</option>
+            {% for departure in departures %}
+            <option value="{{ departure }}" {% if departure == selected_departure %}selected{% endif %}>{{ departure }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="destination">Destination:</label>
+        <select id="destination" name="destination">
+            <option value="All" {% if selected_destination == "All" or not selected_destination %}selected{% endif %}>All</option>
+            {% for destination in destinations %}
+            <option value="{{ destination }}" {% if destination == selected_destination %}selected{% endif %}>{{ destination }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    {{ div|safe }}
+    
+    <div>
+        <h3>Основні статистичні показники:</h3>
+        <ul>
+            <li>Середнє: {{ stats.mean|floatformat:2 }}</li>
+            <li>Медіана: {{ stats.median|floatformat:2 }}</li>
+            <li>Мінімум: {{ stats.min }}</li>
+            <li>Максимум: {{ stats.max }}</li>
+        </ul>
+    </div>
+</body>
+</html>

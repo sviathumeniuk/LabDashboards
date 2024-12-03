@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дашборд: Зарплати співробітників</title>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.js"></script>
+    <link href="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <h1>Дашборд: Зарплати співробітників на рейсі {{ flight_id }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Фільтрувати</button>
+    </form>
+
+    {% if script and div %}
+        <div>
+            {{ script|safe }}
+            {{ div|safe }}
+        </div>
+    {% else %}
+        <p>Немає даних для відображення.</p>
+    {% endif %}
+
+    <h2>Статистичні дані:</h2>
+    <ul>
+        <li>Мінімальна зарплата: {{ min_salary_value }}</li>
+        <li>Максимальна зарплата: {{ max_salary_value }}</li>
+        <li>Медіанна зарплата: {{ median_salary_value }}</li>
+        <li>Середня зарплата: {{ average_salary_value }}</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Кількість багажу на кожному рейсі</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Кількість багажу на кожному рейсі</h1>
+
+    <form method="get">
+        <label for="flightnumber">Оберіть рейси:</label><br>
+        <select name="flightnumber" id="flightnumber" multiple>
+            <option value="all" {% if 'all' in selected_flights or not selected_flights %}selected{% endif %}>Усі рейси</option>
+            {% for flight in all_flights %}
+                <option value="{{ flight }}" {% if flight in selected_flights %}selected{% endif %}>
+                    {{ flight }}
+                </option>
+            {% endfor %}
+        </select><br>
+        <button type="submit">Оновити</button>
+    </form>
+
+    <div>
+        {{ plot_div|safe }}
+    </div>
+    <div>
+        <h3>Статистичні дані:</h3>
+        <ul>
+            <li><strong>Середня кількість багажу:</strong> {{ stats.mean|floatformat:2 }}</li>
+            <li><strong>Медіанна кількість багажу:</strong> {{ stats.median|floatformat:2 }}</li>
+            <li><strong>Мінімальна кількість багажу:</strong> {{ stats.min }}</li>
+            <li><strong>Максимальна кількість багажу:</strong> {{ stats.max }}</li>
+        </ul>
+    </div>    
+</body>
+</html>

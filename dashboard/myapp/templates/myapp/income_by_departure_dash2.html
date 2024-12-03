@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дохід за пунктами відправлення</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Дохід за пунктами відправлення</h1>
+
+        <div class="stats">
+            <p><strong>Середній дохід:</strong> {{ stats.mean|floatformat:2 }} грн</p>
+            <p><strong>Медіанний дохід:</strong> {{ stats.median|floatformat:2 }} грн</p>
+            <p><strong>Мінімальний дохід:</strong> {{ stats.min|floatformat:2 }} грн</p>
+            <p><strong>Максимальний дохід:</strong> {{ stats.max|floatformat:2 }} грн</p>
+        </div>
+
+        <div class="controls">
+            <button onclick="window.location.href='?sort=alphabetical'">Сортувати за алфавітом (A-Z)</button>
+            <button onclick="window.location.href='?sort=reverse_alphabetical'">Сортувати за алфавітом (Z-A)</button>
+        </div>
+
+        <div class="chart-container">
+            {{ chart_html|safe }}
+        </div>
+    </div>
+</body>
+</html>

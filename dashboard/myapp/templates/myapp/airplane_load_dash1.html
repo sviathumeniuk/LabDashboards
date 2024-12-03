@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Аналіз завантаження літаків</title>
+    <link
+      href="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.css"
+      rel="stylesheet" type="text/css">
+    <script
+      src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.js">
+    </script>
+</head>
+<body>
+    <h1>Аналіз завантаження літаків</h1>
+
+    <div>
+        <form method="get" style="display: inline-block;">
+            <input type="hidden" name="sort" value="desc">
+            <button type="submit">Сортувати за спаданням</button>
+        </form>
+        <form method="get" style="display: inline-block;">
+            <input type="hidden" name="sort" value="asc">
+            <button type="submit">Сортувати за зростанням</button>
+        </form>
+        <form method="get" style="display: inline-block;">
+            <input type="hidden" name="sort" value="default">
+            <button type="submit">Сортувати за замовчуванням</button>
+        </form>
+    </div>
+
+    <div>
+        {% if script and div %}
+            {{ script|safe }}
+            {{ div|safe }}
+        {% else %}
+            <p>Дані для графіка відсутні.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h3>Статистичні дані:</h3>
+        <ul>
+            <li><strong>Середній відсоток завантаження:</strong> {{ stats.mean|floatformat:2 }}%</li>
+            <li><strong>Медіанний відсоток завантаження:</strong> {{ stats.median|floatformat:2 }}%</li>
+            <li><strong>Мінімальний відсоток завантаження:</strong> {{ stats.min|floatformat:2 }}%</li>
+            <li><strong>Максимальний відсоток завантаження:</strong> {{ stats.max|floatformat:2 }}%</li>
+        </ul>
+    </div>    
+</body>
+</html>

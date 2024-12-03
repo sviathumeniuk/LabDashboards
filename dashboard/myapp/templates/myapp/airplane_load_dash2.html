@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аналіз завантаження літаків</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Аналіз завантаження літаків</h1>
+
+        <div class="stats">
+            <p><strong>Середнє завантаження:</strong> {{ stats.mean|floatformat:2 }}%</p>
+            <p><strong>Медіанне завантаження:</strong> {{ stats.median|floatformat:2 }}%</p>
+            <p><strong>Мінімальне завантаження:</strong> {{ stats.min|floatformat:2 }}%</p>
+            <p><strong>Максимальне завантаження:</strong> {{ stats.max|floatformat:2 }}%</p>
+        </div>
+
+        <div class="controls">
+            <button onclick="window.location.href='?sort=default'">Початковий стан</button>
+            <button onclick="window.location.href='?sort=asc'">Сортувати за зростанням</button>
+            <button onclick="window.location.href='?sort=desc'">Сортувати за спаданням</button>
+        </div>
+
+        <div>
+            {{ chart_html|safe }}
+        </div>
+    </div>
+</body>
+</html>

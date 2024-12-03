@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <form method="get">
+        <label for="departure">Departure:</label>
+        <select name="departure" id="departure">
+            <option value="All">All</option>
+            {% for departure in all_departures %}
+                <option value="{{ departure }}" {% if departure == selected_departure %}selected{% endif %}>{{ departure }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="destination">Destination:</label>
+        <select name="destination" id="destination">
+            <option value="All">All</option>
+            {% for destination in all_destinations %}
+                <option value="{{ destination }}" {% if destination == selected_destination %}selected{% endif %}>{{ destination }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <div>
+        {{ plot_div|safe }}
+    </div>
+    <div>
+        <h3>Статистичні дані:</h3>
+        <ul>
+            <li><strong>Середнє значення:</strong> {{ stats.mean|floatformat:2 }}</li>
+            <li><strong>Медіана:</strong> {{ stats.median|floatformat:2 }}</li>
+            <li><strong>Мінімум:</strong> {{ stats.min|floatformat:2 }}</li>
+            <li><strong>Максимум:</strong> {{ stats.max|floatformat:2 }}</li>
+        </ul>
+    </div>    
+</body>
+</html>

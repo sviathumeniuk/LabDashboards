@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квитки на рейс {{ flight_id }}</title>
+    <link rel="stylesheet" href="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.css" type="text/css">
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.1.min.js"></script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Квитки на рейс {{ flight_id }}</h1>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Сортування</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Застосувати сортування</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h3>Статистика</h3>
+            <ul class="list-group">
+                <li class="list-group-item">Загальна кількість квитків: {{ total_tickets_sold }}</li>
+                <li class="list-group-item">Загальний дохід: {{ total_revenue }}</li>
+                <li class="list-group-item">Середня ціна квитка: {{ average_ticket_price|default:"N/A" }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <h3 class="text-center">Графік цін квитків</h3>
+        <div class="col-md-12">
+            <div>
+                {{ script|safe }}
+                {{ div|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
